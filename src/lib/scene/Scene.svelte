@@ -1,7 +1,13 @@
 <script lang="ts">
   import { T } from '@threlte/core';
   import { OrbitControls } from '@threlte/extras';
-  import Obstacles from './Obstacles.svelte';
+  import { Debug } from '@threlte/rapier';
+  import PhysObstacles from './PhysObstacles.svelte';
+  import Player from './Player.svelte';
+  import { interactivity } from '@threlte/extras';
+  import Floor from './Floor.svelte';
+
+  interactivity();
 </script>
 
 <!-- Cammera -->
@@ -13,25 +19,29 @@
   <OrbitControls />
 </T.OrthographicCamera>
 
-<T.Mesh>
-  <T.BoxGeometry args={[1, 1, 1]} />
-  <T.MeshStandardMaterial color="red" />
-</T.Mesh>
+<Player />
 
-<Obstacles />
+<!-- <Obstacles /> -->
+<PhysObstacles />
 
+<Floor />
+
+<!-- Debug -->
 <T.AxesHelper scale={5} />
+<Debug color="green" />
 
 <!-- Lights -->
 <T.DirectionalLight
   color={0xffffff}
   intensity={1.8}
   position={[5, 10, 7]}
+  castShadow
 />
 <T.PointLight
   color={0xffaa00}
   intensity={1}
   position={[-3, 5, 3]}
+  castShadow
 />
 <T.AmbientLight
   color={0x404040}

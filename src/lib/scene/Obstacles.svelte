@@ -1,15 +1,14 @@
 <script lang="ts">
-  import { rand } from '$lib/utils';
+  import { rand, type Obstacle } from '$lib/utils';
   import { T, useTask } from '@threlte/core';
-
-  type Object = { x: number; z: number };
 
   let count = 5;
   let motionRate = 0.1;
-  let objects = $state<Object[]>(
+  let objects = $state<Obstacle[]>(
     new Array(count).fill(null).map((_a, ind) => ({
       x: 10 * (ind + 1),
-      z: rand(-4, 4)
+      z: rand(-4, 4),
+      y: 0.5
     }))
   );
 
@@ -27,11 +26,13 @@
 </script>
 
 {#each objects as obj}
-  <T.Mesh
+  <T.Group
     position.x={obj.x}
     position.z={obj.z}
   >
-    <T.BoxGeometry args={[1, 1, 1]} />
-    <T.MeshStandardMaterial color="blue" />
-  </T.Mesh>
+    <T.Mesh>
+      <T.BoxGeometry args={[1, 1, 1]} />
+      <T.MeshStandardMaterial color="blue" />
+    </T.Mesh>
+  </T.Group>
 {/each}
