@@ -12,7 +12,7 @@
   } from 'three/examples/jsm/Addons.js';
   import { WobblePass } from '$lib/wobble';
   import * as THREE from 'three';
-  import { Spring, Tween } from 'svelte/motion';
+  import { game } from '$lib/state.svelte';
 
   const { scene, renderer, camera, size } = useThrelte();
 
@@ -26,25 +26,14 @@
     size.current.height
   );
 
-  /* let tweened = new Tween(0, {
-    duration: 400
-  }); */
-  let tweened = new Spring(0, {
-    stiffness: 0.3,
-    damping: 0.08
-  });
-
   useTask((deltaTime) => {
     renderer.setRenderTarget(target);
     renderer.render(scene, camera.current);
 
     pass.uniforms.uTexture.value = target.texture;
-    console.log(tweened.current);
-    pass.uniforms.uTimer.value = tweened.current;
+    pass.uniforms.uTimer.value = game.wobbleEffectTimer.current;
 
     composer.render(deltaTime);
-
-    //renderer.render(scene, camera.current);
   });
 </script>
 
@@ -57,7 +46,7 @@
   <OrbitControls />
 </T.OrthographicCamera>
 
-<Player {tweened} />
+<Player />
 
 <!-- <Obstacles /> -->
 <PhysObstacles />
@@ -65,8 +54,8 @@
 <Floor />
 
 <!-- Debug -->
-<!-- <T.AxesHelper scale={5} />
-<Debug color="green" /> -->
+<T.AxesHelper scale={5} />
+<Debug color="green" />
 
 <!-- Lights -->
 <T.DirectionalLight
