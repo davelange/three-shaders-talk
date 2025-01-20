@@ -4,7 +4,7 @@
   import { World } from '@threlte/rapier';
 </script>
 
-<Canvas>
+<Canvas autoRender={false}>
   <World>
     <Scene />
   </World>

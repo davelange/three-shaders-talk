@@ -37,7 +37,7 @@
       bind:rigidBody={objects[idx].rigidBody}
       lockRotations
       dominance={2}
-      userData={obj}
+      userData={{ type: 'obstacle' }}
     >
       <AutoColliders
         shape={'cuboid'}
