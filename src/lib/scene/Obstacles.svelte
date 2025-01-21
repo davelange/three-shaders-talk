@@ -1,38 +1,59 @@
 <script lang="ts">
-  import { rand, type Obstacle } from '$lib/utils';
-  import { T, useTask } from '@threlte/core';
+  import { T } from '@threlte/core';
+  import { AutoColliders, RigidBody } from '@threlte/rapier';
+  import { Vector3 } from '@dimforge/rapier3d-compat';
+  import { game } from '$lib/state.svelte';
+  import type { RigidBody as RigidBodyType } from '@dimforge/rapier3d-compat';
 
   let count = 5;
-  let motionRate = 0.1;
-  let objects = $state<Obstacle[]>(
-    new Array(count).fill(null).map((_a, ind) => ({
-      x: 10 * (ind + 1),
-      z: rand(-4, 4),
-      y: 0.5
-    }))
-  );
+  let speed = 5;
+  let gapBetween = 10;
 
-  useTask(() => {
-    objects.map((item) => {
-      if (item.x < -10) {
-        item.x = 10 * objects.length - 1;
-        item.z = rand(-4, 4);
-      } else {
-        item.x = item.x - motionRate;
-      }
-      return item;
-    });
+  let objects = $state<RigidBodyType[]>(new Array(count).fill(undefined));
+
+  function resetObstacle(idx: number) {
+    objects[idx]?.setTranslation(
+      new Vector3(gapBetween * (idx + 1), 0, 0),
+      true
+    );
+  }
+
+  function cycleBack(idx: number) {
+    objects[idx]?.setTranslation(
+      new Vector3(gapBetween * objects.length - 1, 0.5, 0),
+      true
+    );
+  }
+
+  game.on('gameRestarted', () => {
+    objects.map((_o, idx) => resetObstacle(idx));
   });
 </script>
 
-{#each objects as obj}
-  <T.Group
-    position.x={obj.x}
-    position.z={obj.z}
-  >
-    <T.Mesh>
-      <T.BoxGeometry args={[1, 1, 1]} />
-      <T.MeshStandardMaterial color="blue" />
-    </T.Mesh>
+{#each Array(count), idx}
+  <T.Group position={[0, 0.5, 0]}>
+    <RigidBody
+      type="kinematicVelocity"
+      linearVelocity={[game.status === 'playing' ? -speed : 0, 0, 0]}
+      lockRotations
+      userData={{ type: 'obstacle' }}
+      bind:rigidBody={objects[idx]}
+      oncreate={() => resetObstacle(idx)}
+    >
+      <AutoColliders
+        shape={'cuboid'}
+        mass={10}
+        onsensorenter={() => cycleBack(idx)}
+      >
+        <T.Mesh castShadow>
+          <T.BoxGeometry args={[1, 1, 1]} />
+          <T.MeshStandardMaterial
+            color="blue"
+            transparent
+            opacity={game.status === 'idle' ? 0 : 1}
+          />
+        </T.Mesh>
+      </AutoColliders>
+    </RigidBody>
   </T.Group>
 {/each}

@@ -2,7 +2,7 @@
   import { T, useThrelte, useTask } from '@threlte/core';
   import { OrbitControls } from '@threlte/extras';
   import { Debug } from '@threlte/rapier';
-  import PhysObstacles from './PhysObstacles.svelte';
+  import Obstacles from './Obstacles.svelte';
   import Player from './Player.svelte';
   import Floor from './Floor.svelte';
   import {
@@ -48,14 +48,12 @@
 
 <Player />
 
-<!-- <Obstacles /> -->
-<PhysObstacles />
+<Obstacles />
 
 <Floor />
 
 <!-- Debug -->
-<!-- <T.AxesHelper scale={5} />-->
-<!-- <Debug color="green" /> -->
+<Debug color="green" />
 
 <!-- Lights -->
 <T.DirectionalLight
