@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { T, useTask } from '@threlte/core';
+  import { T } from '@threlte/core';
   import { type PhysicalObstacle } from '$lib/utils';
   import { AutoColliders, RigidBody } from '@threlte/rapier';
   import { Vector3 } from '@dimforge/rapier3d-compat';
@@ -15,18 +15,6 @@
       rigidBody: undefined
     }))
   );
-
-  useTask(() => {
-    objects.map((item) => {
-      if (item.rigidBody!.worldCom().x < -10) {
-        item.rigidBody!.setTranslation(
-          new Vector3(10 * objects.length - 1, item.y, 0),
-          true
-        );
-      }
-      return item;
-    });
-  });
 </script>
 
 {#each objects as obj, idx}
@@ -34,13 +22,14 @@
     <RigidBody
       type="kinematicVelocity"
       linearVelocity={[game.isPlaying ? -5 : 0, 0, 0]}
-      bind:rigidBody={objects[idx].rigidBody}
       lockRotations
-      dominance={2}
+      dominance={20}
       userData={{ type: 'obstacle' }}
+      bind:rigidBody={objects[idx].rigidBody}
     >
       <AutoColliders
         shape={'cuboid'}
+        mass={10}
         onsensorenter={() => {
           objects[idx].rigidBody?.setTranslation(
             new Vector3(10 * objects.length - 1, obj.y, 0),

@@ -54,7 +54,7 @@
 <Floor />
 
 <!-- Debug -->
-<T.AxesHelper scale={5} />
+<!-- <T.AxesHelper scale={5} />-->
 <Debug color="green" />
 
 <!-- Lights -->

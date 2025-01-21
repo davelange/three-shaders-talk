@@ -27,7 +27,7 @@ export const WobblePass = {
     void main() {
       vec2 modUv = vUv;
       float modTimer = uTimer > 0.5 ?  1. - uTimer : uTimer * 2.;
-      float disp = sin(30. * vUv.y) * 0.04 * modTimer;
+      float disp = sin(30. * vUv.y) * 0.03 * modTimer;
       modUv.x += disp;
       
       vec4 tex = texture2D(uTexture, modUv);            

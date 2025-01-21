@@ -5,7 +5,8 @@
     type RigidBody as RigidBodyType
   } from '@dimforge/rapier3d-compat';
   import { T } from '@threlte/core';
-  import { AutoColliders, RigidBody } from '@threlte/rapier';
+  import { Collider, RigidBody } from '@threlte/rapier';
+  import PlayerModel from './PlayerModel.svelte';
 
   let rigidBody = $state<RigidBodyType>();
 
@@ -20,13 +21,18 @@
 
 <T.Group position.y={0.5}>
   <RigidBody
+    type="dynamic"
     gravityScale={4}
     linearDamping={0.2}
     bind:rigidBody
   >
-    <AutoColliders
+    <Collider
+      shape="cuboid"
+      args={[0.4, 0.6, 0.4]}
       mass={3}
-      restitution={0.5}
+      restitution={0.7}
+      friction={10}
+      contactForceEventThreshold={0.1}
       oncollisionenter={({ targetRigidBody }) => {
         if (
           targetRigidBody &&
@@ -37,10 +43,7 @@
         }
       }}
     >
-      <T.Mesh castShadow>
-        <T.BoxGeometry args={[1, 1, 1]} />
-        <T.MeshStandardMaterial color="red" />
-      </T.Mesh>
-    </AutoColliders>
+      <PlayerModel />
+    </Collider>
   </RigidBody>
 </T.Group>

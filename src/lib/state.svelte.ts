@@ -8,7 +8,9 @@ class Game {
   });
 
   async stop() {
-    this.isPlaying = false;
+    setTimeout(() => {
+      this.isPlaying = false;
+    }, 100);
 
     // Wobble effect
     await this.wobbleEffectTimer.set(1);
