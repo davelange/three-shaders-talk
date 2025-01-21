@@ -55,7 +55,7 @@
 
 <!-- Debug -->
 <!-- <T.AxesHelper scale={5} />-->
-<Debug color="green" />
+<!-- <Debug color="green" /> -->
 
 <!-- Lights -->
 <T.DirectionalLight

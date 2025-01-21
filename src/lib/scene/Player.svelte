@@ -5,6 +5,7 @@
     type RigidBody as RigidBodyType
   } from '@dimforge/rapier3d-compat';
   import { T } from '@threlte/core';
+  import { Quaternion } from 'three';
   import { Collider, RigidBody } from '@threlte/rapier';
   import PlayerModel from './PlayerModel.svelte';
 
@@ -15,6 +16,11 @@
       rigidBody?.applyImpulse(new Vector3(0, 50, 0), true);
     }
   }
+
+  game.on('gameRestarted', () => {
+    rigidBody?.setTranslation(new Vector3(0, 0.5, 0), true);
+    rigidBody?.setRotation(new Quaternion(0, 0, 0), true);
+  });
 </script>
 
 <svelte:document onkeydown={handleClick} />
@@ -31,7 +37,7 @@
       args={[0.4, 0.6, 0.4]}
       mass={3}
       restitution={0.7}
-      friction={10}
+      friction={2}
       contactForceEventThreshold={0.1}
       oncollisionenter={({ targetRigidBody }) => {
         if (
