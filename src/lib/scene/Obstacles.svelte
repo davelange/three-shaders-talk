@@ -11,6 +11,7 @@
 
   let objects = $state<RigidBodyType[]>(new Array(count).fill(undefined));
 
+  // set initial position
   function resetObstacle(idx: number) {
     objects[idx]?.setTranslation(
       new Vector3(gapBetween * (idx + 1), 0, 0),
@@ -18,6 +19,7 @@
     );
   }
 
+  // go to back of queue after going out of view
   function cycleBack(idx: number) {
     objects[idx]?.setTranslation(
       new Vector3(gapBetween * objects.length - 1, 0.5, 0),

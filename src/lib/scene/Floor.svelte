@@ -21,10 +21,9 @@
 >
   <RigidBody type="fixed">
     <Collider
-      mass={0.01}
       sensor
       shape="cuboid"
-      args={[50, 50, 0]}
+      args={[10, 10, 0]}
     />
   </RigidBody>
 </T.Group>

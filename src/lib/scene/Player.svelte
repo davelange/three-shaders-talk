@@ -13,11 +13,13 @@
 
   async function handleClick(event: KeyboardEvent) {
     if (event.code === 'Space') {
+      // make it jump
       rigidBody?.applyImpulse(new Vector3(0, 50, 0), true);
     }
   }
 
   game.on('gameRestarted', () => {
+    // go back to center, normal rotation
     rigidBody?.setTranslation(new Vector3(0, 0.5, 0), true);
     rigidBody?.setRotation(new Quaternion(0, 0, 0), true);
   });

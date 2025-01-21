@@ -1,12 +1,9 @@
 <script lang="ts">
   import { useGltf } from '@threlte/extras';
-  import type { Mesh } from 'three';
   import { T } from '@threlte/core';
   import { degToRad } from 'three/src/math/MathUtils.js';
 
-  let mesh = $state<Mesh>();
   let gltf = useGltf('/assets/chicken/scene.gltf');
-  $inspect($gltf);
 </script>
 
 {#if $gltf}
@@ -18,7 +15,6 @@
       on:create={({ ref }) => {
         ref.geometry.center();
       }}
-      ref={mesh}
       castShadow
       geometry={$gltf.nodes.Object_4.geometry}
       material={$gltf.materials.Material}
