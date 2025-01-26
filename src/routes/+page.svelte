@@ -1,7 +1,5 @@
 <script lang="ts">
   import SceneWrapper from '$lib/scene/SceneWrapper.svelte';
-  import '$lib/styles/reset.css';
-  import '$lib/styles/app.css';
   import { game } from '$lib/state.svelte';
 </script>
 
