@@ -53,7 +53,7 @@
 <Floor />
 
 <!-- Debug -->
-<Debug color="green" />
+<!-- <Debug color="green" /> -->
 
 <!-- Lights -->
 <T.DirectionalLight
