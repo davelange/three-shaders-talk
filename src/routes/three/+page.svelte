@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import * as THREE from 'three';
-  import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
   // Create the scene
   const scene = new THREE.Scene();
@@ -68,9 +67,6 @@
     // Make it not look terrible
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.update();
 
     // Render
     render();
