@@ -32,7 +32,7 @@
   const obstacleMaterial = new THREE.MeshStandardMaterial({ color: 'blue' });
   const obstacleMeshes = Array.from({ length: 4 }).map((_o, idx) => {
     let mesh = new THREE.Mesh(cubeGeometry, obstacleMaterial);
-    mesh.position.x = (idx + 1) * 10;
+    mesh.position.x = (idx + 1) * 4;
     mesh.castShadow = true;
     scene.add(mesh);
     return mesh;
@@ -69,6 +69,7 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     // Render
+    //renderer.render(scene, camera);
     render();
   });
 
