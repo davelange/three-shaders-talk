@@ -11,7 +11,7 @@
 
   let rigidBody = $state<RigidBodyType>();
 
-  async function handleClick(event: KeyboardEvent) {
+  async function handleKeydown(event: KeyboardEvent) {
     if (event.code === 'Space') {
       // make it jump
       rigidBody?.applyImpulse(new Vector3(0, 50, 0), true);
@@ -25,7 +25,7 @@
   });
 </script>
 
-<svelte:document onkeydown={handleClick} />
+<svelte:document onkeydown={handleKeydown} />
 
 <T.Group position.y={0.5}>
   <RigidBody

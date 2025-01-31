@@ -37,7 +37,7 @@
   });
 </script>
 
-<!-- Cammera -->
+<!-- Camera -->
 <T.OrthographicCamera
   makeDefault
   position={[10, 10, 10]}

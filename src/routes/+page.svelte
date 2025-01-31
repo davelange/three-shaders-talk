@@ -7,6 +7,7 @@
 
 <div class="panel">
   {#if game.status === 'idle'}
+    <p>Hit Space to jump</p>
     <button
       onclick={() => {
         game.start();
@@ -27,6 +28,7 @@
 
 <style>
   .panel {
+    text-align: center;
     position: absolute;
     left: 0;
     right: 0;
@@ -36,6 +38,7 @@
     color: #e0e7ff;
 
     & button {
+      margin-top: 1rem;
       padding: 0.5rem 1rem;
       border-radius: 0;
       font-weight: 600;
