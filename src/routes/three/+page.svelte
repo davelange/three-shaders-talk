@@ -69,8 +69,7 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     // Render
-    //renderer.render(scene, camera);
-    render();
+    renderer.render(scene, camera);
   });
 
   // Render loop
