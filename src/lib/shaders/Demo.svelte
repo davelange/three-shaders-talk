@@ -4,7 +4,7 @@
   import fragmentShader from './fragmentShader.glsl?raw';
   import { ShaderMaterial, TextureLoader, Uniform } from 'three';
 
-  let { red }: { red: number } = $props();
+  let { someNumber }: { someNumber: number } = $props();
 
   let shaderMaterial = $state<ShaderMaterial>();
 
@@ -15,7 +15,7 @@
   useTask((delta) => {
     if (!shaderMaterial) return;
 
-    shaderMaterial.uniforms.red.value = red;
+    shaderMaterial.uniforms.someNumber.value = someNumber;
     shaderMaterial.uniforms.time.value = delta;
   });
 </script>
@@ -29,7 +29,7 @@
     {fragmentShader}
     uniforms={{
       logo: new Uniform(img),
-      red: new Uniform(0),
+      someNumber: new Uniform(0),
       time: new Uniform(0)
     }}
   />

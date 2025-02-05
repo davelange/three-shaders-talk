@@ -2,30 +2,34 @@
   import { Canvas } from '@threlte/core';
   import Demo from './Demo.svelte';
 
-  let red = $state(0);
+  let someNumber = $state(0);
 </script>
 
 <Canvas>
-  <Demo {red} />
+  <Demo {someNumber} />
 </Canvas>
 
 <div>
+  <p>someNumber: {someNumber.toPrecision(3)}</p>
   <input
     type="range"
     min={0}
     max={1}
     step="0.01"
-    bind:value={red}
+    bind:value={someNumber}
   />
 </div>
 
 <style>
-  input {
+  div {
     position: absolute;
     left: 0;
     right: 0;
-    top: 8vh;
+    top: 3vh;
     margin: auto;
     width: fit-content;
+  }
+  p {
+    color: white;
   }
 </style>

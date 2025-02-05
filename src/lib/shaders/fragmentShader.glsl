@@ -2,7 +2,7 @@
 varying vec2 vUv;
 
 /* Uniforms are like arguments passed in */
-uniform float red;
+uniform float someNumber;
 uniform float time;
 uniform sampler2D logo; // <- this is an image
 
